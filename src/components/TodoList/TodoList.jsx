@@ -15,8 +15,7 @@ export default function TodoList({ todo, setTodo }) {
             return item;
         });
         setTodo(newTodo);
-
-
+        deleteTodo(id)
     }
 
     function editTodo(id){

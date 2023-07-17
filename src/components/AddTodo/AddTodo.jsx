@@ -17,9 +17,9 @@ function AddTodo({ todo, setTodo }) {
     }
 
     return (
-        <div>
-            <input type="text" placeholder='Введи завдання' value={value} onChange={(e) => setValue(e.target.value)} />
-            <button onClick={saveTodo}>Додати +</button>
+        <div className='addTask'>
+            <input type="text" className='addTask__inp' placeholder='Введи завдання' value={value} onChange={(e) => setValue(e.target.value)} />
+            <button onClick={saveTodo} className='addTask__btn'>Додати +</button>
         </div>
     )
 }
