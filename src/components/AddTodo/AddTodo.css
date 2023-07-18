@@ -13,6 +13,7 @@
     border: 2px solid #fff;
     margin-right: 10px;
     transition: 0.5s;
+    margin-bottom: 10px;
     border-radius: 10px;
     color: red;
 }
@@ -33,9 +34,11 @@
     transition: 0.5s;
  }
 .addTask__btn{
+    margin-bottom: 10px;
     width: 100px;
     height: 40px;
     color: #fff;
+    margin-left: 10px;
     border: 1px solid #fff;
     transition: 0.5s;
     cursor: pointer;
@@ -48,4 +51,7 @@
     border: 1px solid red;
     transition: 0.5s;
 
+}
+.addTask__select{
+    margin-bottom: 10px;
 }
