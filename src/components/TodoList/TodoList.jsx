@@ -5,10 +5,17 @@ import './Todolist.css'
 
 export default function TodoList({ todo, setTodo }) {
     
+    const [deleteTodos, setDeleteTodos] = useState([]);
 
     function deleteTodo(id) {
+        let newDeleteTodos = []
+        let item = todo.filter(item => item.id == id);
+        console.log(item)
+        newDeleteTodos = newDeleteTodos.push(item)
+        setDeleteTodos(newDeleteTodos)
         let newTodo = [...todo].filter(item => item.id !== id);
         setTodo(newTodo);
+        console.log(deleteTodos);
     }
     
     function statusTodo(id) {
