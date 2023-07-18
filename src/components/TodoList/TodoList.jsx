@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './Todolist.css'
 
 export default function TodoList({ todo, setTodo }) {
 
@@ -22,12 +23,13 @@ export default function TodoList({ todo, setTodo }) {
         
     }
     return (
-        <div>
-
+        <div className='taskContainer'>
             {
                 todo.map(item =>
-                    <div key={item.id}>
-                        <div>{item.title}</div>
+                    <div key={item.id} className='task'>
+                        <h1 className='task__text'>{item.title}</h1>
+                        <h3 className='task__text'>Data:10.08.2007</h3>
+                        <h3 className='task__text'>Difficulty:Hard</h3>
                         <button onClick={() => deleteTodo(item.id)}>Видалити</button>
                         <button onClick={() => statusTodo(item.id)}>Виконати</button>
                         <button onClick={() => editTodo(item.id)}>Редагувати</button>
