@@ -54,3 +54,10 @@
     color: red;
     border: 1px solid red;
 }
+.center{
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

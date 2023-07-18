@@ -3,30 +3,23 @@ import React, {useState} from 'react';
 import './Todolist.css'
 
 
-export default function TodoList({ todo, setTodo }) {
+export default function TodoList({ todo, setTodo, deleteTodoList, setDeleteTodoList }) {
     
     const [deleteTodos, setDeleteTodos] = useState([]);
+    let newDeleteTodos = [...deleteTodos]
 
     function deleteTodo(id) {
-        let newDeleteTodos = []
-        let item = todo.filter(item => item.id == id);
-        console.log(item)
-        newDeleteTodos = newDeleteTodos.push(item)
-        setDeleteTodos(newDeleteTodos)
+        let item = [...todo].filter(item => item.id == id);
+        newDeleteTodos.push(item[0])
+        setDeleteTodos([...newDeleteTodos])
         let newTodo = [...todo].filter(item => item.id !== id);
         setTodo(newTodo);
         console.log(deleteTodos);
     }
     
     function statusTodo(id) {
-        let newTodo = [...todo].filter(item => {
-            if (item.id == id) {
-                item.status = !item.status;
-            }
-            return item;
-        });
+        let newTodo = [...todo].filter(item => item.id !== id);
         setTodo(newTodo);
-        deleteTodo(id)
     }
     function editTodo(id){
         let newTodo = [...todo].filter(item => {
@@ -61,12 +54,22 @@ export default function TodoList({ todo, setTodo }) {
         setValue('')
         setDifficulty('');
     }
+   
+    function returnTask(id){
+        let newTodoListFromBasket = [...todo]
+        let item = [...newDeleteTodos].filter(item => item.id == id);
+        newTodoListFromBasket.push(item[0])
+        setTodo([...newTodoListFromBasket])
+        console.log(todo);
+        let sss = [...newDeleteTodos].filter(item => item.id !== id);
+        setDeleteTodos(sss);
+    }
 
 
    
     return (
-        <div className='taskContainer'>
-            
+        deleteTodoList == false ? (
+            <div className='taskContainer'>
             {   todo.length == 0 ? <h1 className='task__text'>Nothing yet</h1> :
                 todo.map(item => 
                     item.change ? (
@@ -95,5 +98,39 @@ export default function TodoList({ todo, setTodo }) {
                 )
             }
         </div>
+        ) : (
+            <div className='center'>
+            <h1 className='task__text'>Basket</h1> 
+            <div className='taskContainer'>
+               {
+                deleteTodos.map(item => 
+                    item.change ? (
+                        <div key={item.id} className='task'>
+                            <input type="text" className='addTask__inp' placeholder='Введи завдання' value={value} onChange={(e) => setValue(e.target.value)} />
+                            <select  name="select" className='addTask__select' onChange={(e) =>  setDifficulty(e.target.value)}>
+                                <option value='1Easy' >Easy</option>
+                                <option value='2Medium' >Medium</option>
+                                <option value='3Hard'  >Hard</option>
+                            </select>
+                            <button onClick={() => submitChangesTodo(item.id)} className='addTask__btn'>Submit</button>
+                        </div>
+                    ) : (
+                        <div key={item.id} className='task'>
+                        <h1 className='task__text'>{item.title}</h1>
+                        <h3 className='task__text'>Time: {item.submitTime}</h3>
+                        <h3 className='task__text'>Data: {item.submitData}</h3>
+                        <h3 className='task__text'>Difficulty: {item.difficultyWord}</h3>
+                        <div className="task__row">
+                        <button className='task__btn' onClick={() => returnTask(item.id)}>Повернути</button>
+                        </div>
+                    </div>
+                    )
+                )
+                    }
+        </div>
+        </div>
+        )
+
+      
     )
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './AddTodo.css'
 import { v4 as uuid } from 'uuid'
 
-function AddTodo({ todo, setTodo }) {
+function AddTodo({ todo, setTodo, deleteTodoList, setDeleteTodoList }) {
 
     const [value, setValue] = useState('');
     const [difficulty, setDifficulty] = useState('');
@@ -26,13 +26,12 @@ function AddTodo({ todo, setTodo }) {
         }])
         setValue('');
         console.log(todo);  
-        
     }
 
     
 
     return (
-        <div className='addTask'>
+        <div className='addTask' style={{'display':deleteTodoList ? 'none' : 'flex'}}>
             <input type="text" className='addTask__inp' placeholder='Введи завдання' value={value} onChange={(e) =>  setValue(e.target.value)} />
             <select  name="select" className='addTask__select' value={difficulty} onChange={(e) =>  setDifficulty(e.target.value)}>
                 <option value='1Easy' >Easy</option>

@@ -9,11 +9,12 @@ function App() {
   const [todo, setTodo] = useState([
    
   ]);
+  const [deleteTodoList, setDeleteTodoList] = useState(false)
   return (
     <div className="App">
-      <Header />
-      <AddTodo todo={todo} setTodo={setTodo} />
-      <TodoList todo={todo}  setTodo={setTodo} />
+      <Header deleteTodoList={deleteTodoList}  setDeleteTodoList={setDeleteTodoList} />
+      <AddTodo todo={todo} setTodo={setTodo} deleteTodoList={deleteTodoList}  setDeleteTodoList={setDeleteTodoList} />
+      <TodoList todo={todo} deleteTodoList={deleteTodoList}  setDeleteTodoList={setDeleteTodoList} setTodo={setTodo} />
     </div>
   );
 }
